@@ -7,15 +7,17 @@
         "prepare": "husky",
         "formate:check": "prettier --check .",
         "formate:fix": "prettier --write .",
-        "lint:stylelint":"stylelint **/*.css",
+        "lint:stylelint": "stylelint **/*.css",
         "dev": "vite",
         "build": "tsc -b && vite build",
         "lint": "eslint",
         "preview": "vite preview"
     },
     "dependencies": {
+        "@tailwindcss/vite": "^4.1.10",
         "react": "^19.1.0",
-        "react-dom": "^19.1.0"
+        "react-dom": "^19.1.0",
+        "tailwindcss": "^4.1.10"
     },
     "devDependencies": {
         "@commitlint/cli": "^19.8.1",
