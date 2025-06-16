@@ -1,7 +1,7 @@
 import './App.css'
 
 function App() {
-    // console.log("hey") // it gives eslint error
+    // console.log(import.meta.env.VITE_ENV) // it gives eslint error
     return (
         <>
             <div>Hello</div>
