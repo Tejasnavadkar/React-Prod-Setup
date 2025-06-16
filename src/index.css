@@ -1,11 +1,11 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-.login-container{
+.login-container {
     background-color: aqua;
 }
 
 /* we can also use tailwind classes inside css */
 
-.register-contsiner {
-    @apply bg-red-500
-}
+/* .register-contsiner {
+    @apply bg-red-500;
+} */
