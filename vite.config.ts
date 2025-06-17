@@ -11,6 +11,7 @@ type TMode = 'development' | 'production'
 interface envVariables {
     PORT: string
     VITE_ENV: string
+    BACKEND_PROXY: string
 }
 
 function envValidation(allEnvVariables: envVariables, envMode: TMode) {
@@ -40,15 +41,49 @@ export default defineConfig(({ mode }) => {
     // now create fn to convert port string into number
     const port = normalisePort(allEnvVariables.PORT)
 
-    const config = {
-        port,
-        open: true
-    }
+    // const config = {
+    //     port,
+    //     open: true
+    //     // Proxy:{
+    //     //     '/api':{
+    //     //         target:'https://dummyjson.com/test',
+    //     //         changeOrigin:true,
+    //     //         rewrite: (path:string) => {
+    //     //              console.log('Rewriting path:', path);
+    //     //            return path.replace(/^\/api/, '')
+    //     //         }
+    //     //     }
+    //     // }
+    // }  // we cant assign config obj to server or preview it coz parsing error
 
     return {
         plugins: [react(), tailwindcss()],
-        server: config, // now when we run our react app it runs on this port not a default 5173 port
-        preview: config,
+        server: {
+            port: port,
+            open: true,
+            proxy: {
+                // now we make  https://dummyjson.com/test this to proxy
+                '/api': {
+                    target: allEnvVariables.BACKEND_PROXY, //'https://dummyjson.com/test'
+                    changeOrigin: true,
+                    rewrite: (path: string) => {
+                        //  console.log('Rewriting path:', path);
+                        return path.replace(/^\/api/, '')
+                    }
+                }
+            }
+        }, // now when we run our react app it runs on this port not a default 5173 port
+        preview: {
+            port: port,
+            open: true,
+            proxy: {
+                '/api': {
+                    target: allEnvVariables.BACKEND_PROXY, // 'https://dummyjson.com/test'
+                    changeOrigin: true,
+                    rewrite: (path: string) => path.replace(/^\/api/, '')
+                }
+            }
+        },
         build: {
             minify: true // make build code in minify version
         }
