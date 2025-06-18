@@ -1,0 +1,1 @@
+here we create components that used by almost all components these components are the global components eg, navbar, protectedRoutes
