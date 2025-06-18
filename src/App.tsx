@@ -1,3 +1,4 @@
+import { LoginPage } from '@features/auth'
 import './App.css'
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
     return (
         <>
             <div>Hello</div>
+            <LoginPage />
         </>
     )
 }
